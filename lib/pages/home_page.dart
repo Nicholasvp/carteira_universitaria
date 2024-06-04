@@ -1,3 +1,4 @@
+import 'package:carteira_universitaria/pages/movimentacao_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -16,7 +17,12 @@ class _HomePageState extends State<HomePage> {
       ),
       body: Column(
         children: [
-          Container(),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const MovimentacaoPage()));
+            },
+            child: const Icon(Icons.add),
+          ),
         ],
       ),
     );
