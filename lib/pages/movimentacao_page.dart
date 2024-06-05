@@ -33,7 +33,7 @@ class _MovimentacaoPageState extends State<MovimentacaoPage> {
                 controller: expenseNameController,
                 style: TextStyle(color: white),
                 decoration: InputDecoration(
-                  labelText: 'Título da Despesa',
+                  labelText: 'Título da Movimentação',
                   labelStyle: TextStyle(color: white),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: white),
@@ -48,7 +48,7 @@ class _MovimentacaoPageState extends State<MovimentacaoPage> {
                 controller: expenseValueController,
                 style: TextStyle(color: white),
                 decoration: InputDecoration(
-                  labelText: 'Valor da Despesa',
+                  labelText: 'Valor da Movimentação',
                   labelStyle: TextStyle(color: white),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: white),

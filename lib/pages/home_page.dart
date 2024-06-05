@@ -1,5 +1,6 @@
 import 'package:carteira_universitaria/controllers/carteira_controller.dart';
 import 'package:carteira_universitaria/pages/movimentacao_page.dart';
+import 'package:carteira_universitaria/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,9 +56,19 @@ class _HomePageState extends State<HomePage> {
                 itemCount: controller.carteira.extrato.length,
                 itemBuilder: (context, index) {
                   final movimentacao = controller.carteira.extrato[index];
-                  return ListTile(
-                    title: Text(movimentacao.descricao),
-                    subtitle: Text(movimentacao.valor.toString()),
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ListTile(
+                      tileColor: darkBlue,
+                      title: Text(
+                        movimentacao.descricao,
+                        style: TextStyle(color: white),
+                      ),
+                      subtitle: Text(
+                        '${movimentacao.valor}',
+                        style: TextStyle(color: white),
+                      ),
+                    ),
                   );
                 },
               ),
