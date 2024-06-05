@@ -1,22 +1,31 @@
+import 'package:carteira_universitaria/controllers/carteira_controller.dart';
+import 'package:carteira_universitaria/models/movimentacao_model.dart';
 import 'package:carteira_universitaria/utils/colors.dart';
 import 'package:flutter/material.dart';
 
-class MovimentacaoPage extends StatelessWidget {
-  MovimentacaoPage({super.key});
-
-  final expenseNameController = TextEditingController();
-  final expenseValueController = TextEditingController();
+class MovimentacaoPage extends StatefulWidget {
+  const MovimentacaoPage({super.key, required this.controller});
+  final CarteiraController controller;
 
   @override
+  State<MovimentacaoPage> createState() => _MovimentacaoPageState();
+}
+
+class _MovimentacaoPageState extends State<MovimentacaoPage> {
+  @override
   Widget build(BuildContext context) {
+    String tipodeDespesa = '';
+    final expenseNameController = TextEditingController();
+    final expenseValueController = TextEditingController();
     return Scaffold(
+      backgroundColor: darkBlue,
       appBar: AppBar(
-        title: const Text('Registrar Despesa'),
+        title: const Text('Registrar Movimentação'),
         backgroundColor: darkBlue,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-            child: Container(
+        child: Container(
           padding: const EdgeInsets.all(20),
           child: Column(
             children: [
@@ -52,15 +61,15 @@ class MovimentacaoPage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField(
+                dropdownColor: darkBlue,
                 decoration: InputDecoration(
-                  labelText: 'Tipo de Despesa',
+                  labelText: 'Tipo de Movimentação',
                   labelStyle: TextStyle(color: white),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: white),
                   ),
                 ),
-                items: ['Debito', 'Credito']
-                    .map<DropdownMenuItem<String>>((String value) {
+                items: ['Depósito', 'Gasto'].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
@@ -70,7 +79,7 @@ class MovimentacaoPage extends StatelessWidget {
                   );
                 }).toList(),
                 onChanged: (e) {
-                  
+                  tipodeDespesa = e ?? '';
                 },
               ),
               const SizedBox(
@@ -78,9 +87,22 @@ class MovimentacaoPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // controller.addExpense();
-                  // Get.back();
-                  // controller.update();
+                  var movimentacaoModel = MovimentacaoModel(
+                    descricao: expenseNameController.text,
+                    valor: double.parse(expenseValueController.text),
+                    data: DateTime.now().toString(),
+                    tipo: tipodeDespesa,
+                  );
+
+                  setState(() {
+                    if (tipodeDespesa == 'Depósito') {
+                      widget.controller.depositar(movimentacaoModel);
+                    } else {
+                      widget.controller.gastar(movimentacaoModel);
+                    }
+                  });
+
+                  Navigator.pop(context, true);
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all(white),
@@ -92,7 +114,8 @@ class MovimentacaoPage extends StatelessWidget {
               ),
             ],
           ),
-        ))
+        ),
+      ),
     );
   }
 }

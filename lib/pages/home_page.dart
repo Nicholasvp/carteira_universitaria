@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final controller = CarteiraController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +34,18 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 20),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MovimentacaoPage()));
+              onPressed: () async {
+                bool edit = await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MovimentacaoPage(
+                      controller: controller,
+                    ),
+                  ),
+                );
+                if (edit) {
+                  setState(() {});
+                }
               },
               child: const Icon(Icons.add),
             ),
