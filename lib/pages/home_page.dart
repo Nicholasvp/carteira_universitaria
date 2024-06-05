@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const MovimentacaoPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MovimentacaoPage()));
             },
             child: const Icon(Icons.add),
           ),
