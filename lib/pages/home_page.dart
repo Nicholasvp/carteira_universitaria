@@ -22,7 +22,15 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('${controller.carteira.saldo}'),
+            const Text(
+              'Saldo:',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              '${controller.carteira.saldo}',
+              style: const TextStyle(fontSize: 24),
+            ),
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
